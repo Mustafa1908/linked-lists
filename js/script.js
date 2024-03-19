@@ -4,18 +4,18 @@ class LinkedList {
   }
 
   prepend(value) {
-    let tmp = null;
-    if (this.listHead != null) tmp = this.listHead;
+    let node = null;
+    if (this.listHead != null) node = this.listHead;
     this.listHead = new Node(value);
-    this.listHead.nextNode = tmp;
+    this.listHead.nextNode = node;
   }
 
   append(value) {
     if (this.listHead == null) this.prepend(value);
     else {
-      let tmp = this.listHead;
-      while (tmp.nextNode != null) tmp = tmp.nextNode;
-      tmp.nextNode = new Node(value);
+      let node = this.listHead;
+      while (node.nextNode != null) node = node.nextNode;
+      node.nextNode = new Node(value);
     }
   }
 
@@ -25,12 +25,53 @@ class LinkedList {
     }
 
     let size = 1;
-    let tmp = this.listHead;
-    while (tmp.nextNode != null) {
-      tmp = tmp.nextNode;
+    let node = this.listHead;
+    while (node.nextNode != null) {
+      node = node.nextNode;
       size++;
     }
     return size;
+  }
+
+  head() {
+    return this.listHead;
+  }
+
+  tail() {
+    let node = this.listHead;
+    while (node != null) {
+      if (node.nextNode === null) {
+        return node;
+      }
+
+      node = node.nextNode;
+    }
+  }
+
+  at(index) {
+    let node = this.listHead;
+    let iterator = 0;
+    while (iterator != index) {
+      if (node.nextNode === null) {
+        return node;
+      }
+
+      node = node.nextNode;
+      iterator++;
+    }
+    return node;
+  }
+
+  contains(value) {
+    let node = this.listHead;
+    while (node != null) {
+      if (node.value === value) {
+        return true;
+      }
+
+      node = node.nextNode;
+    }
+    return false;
   }
 }
 
@@ -45,5 +86,11 @@ let linkedList = new LinkedList();
 
 linkedList.append("text1");
 linkedList.append("text2");
+linkedList.append("text3");
+
 console.log(linkedList.size());
+console.log(linkedList.head());
+console.log(linkedList.tail());
+console.log(linkedList.at(0));
+console.log(linkedList.contains("text2"));
 console.log(linkedList);
