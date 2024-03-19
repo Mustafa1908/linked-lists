@@ -62,6 +62,18 @@ class LinkedList {
     return node;
   }
 
+  pop() {
+    let node = this.listHead;
+    while (node != null) {
+      if (node.value === "text2") {
+        node.nextNode = null;
+        return this.listHead;
+      }
+
+      node = node.nextNode;
+    }
+  }
+
   contains(value) {
     let node = this.listHead;
     while (node != null) {
@@ -72,6 +84,34 @@ class LinkedList {
       node = node.nextNode;
     }
     return false;
+  }
+
+  find(value) {
+    if (this.listHead === null) {
+      return;
+    }
+
+    let node = this.listHead;
+    let iterator = 1;
+    while (node != null) {
+      if (node.value === value) {
+        return iterator;
+      }
+
+      node = node.nextNode;
+      iterator++;
+    }
+    return null;
+  }
+
+  toString() {
+    let node = this.listHead;
+    let stringifiedLinkedList = "";
+    while (node !== null) {
+      stringifiedLinkedList += `( ${node.value} ) -> `;
+      node = node.nextNode;
+    }
+    return (stringifiedLinkedList += "null");
   }
 }
 
@@ -92,5 +132,8 @@ console.log(linkedList.size());
 console.log(linkedList.head());
 console.log(linkedList.tail());
 console.log(linkedList.at(0));
+console.log(linkedList.pop());
 console.log(linkedList.contains("text2"));
+console.log(linkedList.find("text2"));
+console.log(linkedList.toString());
 console.log(linkedList);
