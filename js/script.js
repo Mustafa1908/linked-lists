@@ -142,6 +142,27 @@ class LinkedList {
       return this.toString();
     }
   }
+
+  removeAt(index) {
+    let node = this.listHead;
+    let nodeArray = [];
+
+    while (node !== null) {
+      nodeArray.push(node.value);
+      node = node.nextNode;
+    }
+
+    nodeArray.splice(index, 1);
+    this.listHead = null;
+    let iterator = 0;
+
+    while (iterator < nodeArray.length) {
+      this.append(nodeArray[iterator]);
+      iterator++;
+    }
+
+    return this.toString();
+  }
 }
 
 class Node {
@@ -170,5 +191,6 @@ console.log(linkedList.pop());
 console.log(linkedList.contains("text2"));
 console.log(linkedList.find("text2"));
 console.log(linkedList.toString());
-console.log(linkedList.insertAt("text55", 7));
+console.log(linkedList.insertAt("text55", 6));
+console.log(linkedList.removeAt(1));
 console.log(linkedList);
