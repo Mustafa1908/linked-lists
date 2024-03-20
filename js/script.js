@@ -65,7 +65,7 @@ class LinkedList {
   pop() {
     let node = this.listHead;
     while (node != null) {
-      if (node.value === "text2") {
+      if (node.nextNode.nextNode === null) {
         node.nextNode = null;
         return this.listHead;
       }
@@ -113,6 +113,35 @@ class LinkedList {
     }
     return (stringifiedLinkedList += "null");
   }
+
+  insertAt(value, index) {
+    let node = this.listHead;
+    let nodeArray = [];
+    while (node !== null) {
+      nodeArray.push(node.value);
+      node = node.nextNode;
+    }
+    this.listHead = null;
+    let iterator = 0;
+
+    while (iterator < index) {
+      this.append(nodeArray[iterator]);
+      iterator++;
+    }
+
+    this.append(value);
+    iterator++;
+
+    if (iterator > nodeArray.length) {
+      return this.toString();
+    } else {
+      while (iterator < nodeArray.length) {
+        this.append(nodeArray[iterator]);
+        iterator++;
+      }
+      return this.toString();
+    }
+  }
 }
 
 class Node {
@@ -127,6 +156,11 @@ let linkedList = new LinkedList();
 linkedList.append("text1");
 linkedList.append("text2");
 linkedList.append("text3");
+linkedList.append("text4");
+linkedList.append("text5");
+linkedList.append("text6");
+linkedList.append("text7");
+linkedList.append("text8");
 
 console.log(linkedList.size());
 console.log(linkedList.head());
@@ -136,4 +170,5 @@ console.log(linkedList.pop());
 console.log(linkedList.contains("text2"));
 console.log(linkedList.find("text2"));
 console.log(linkedList.toString());
+console.log(linkedList.insertAt("text55", 7));
 console.log(linkedList);
